@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index",
+    "start": "npm install && node src/index",
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
+    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "date-format": "^3.0.0",
     "dotenv": "^8.2.0",
