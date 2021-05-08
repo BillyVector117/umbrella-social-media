@@ -1,0 +1,136 @@
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <nav class="navbar navProfile">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="firstColProfile float-left avatarImage"
+                        disabled="disabled" data-bs-toggle="modal"
+                        data-bs-target="#uploadModal">
+                        <img src="{{user.imagePath}}" class="border
+                            border-success imageProfile img-fluid"
+                            alt="Profile pic">
+                    </div>
+                </div>
+                <div class="col-md-6 colProfile"><h3>{{user.username}}</h3></div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1"
+    aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Update profile
+                    picture</h5>
+                <button type="button" class="btn btn-close"
+                    data-bs-dismiss="modal" aria-label="Close"
+                    onclick="">X</button>
+            </div>
+            <div class="modal-body">
+                {{!-- CONTENT MODAL --}}
+                <form action="/user/updatePicture"
+                    enctype="multipart/form-data" method="POST"
+                    onchange="">
+                    <label for="image">Select your new profile picture: </label>
+                    <div class="form-group">
+                        <input type="file" class="form-control necesary
+                            w-75
+                            transparent-input"
+                            id="necesary"
+                            onchange=""
+                            name="image">
+                    </div>
+
+                    <button id="btn-success" type="submit" class="btn
+                        btn-success">Accept</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button style="margin-top: 10px;" type="button" class="btn
+                    btn-secondary"
+                    data-bs-dismiss="modal" onclick="">Close</button>
+            </div>
+        </div>
+    </div>
+</div>{{!-- End Modal --}}
+<div class="row text-center">
+    <div class="col-md-12">
+        <h3 class="m-3">Settings & Privacy</h3>
+        <table class="table table-hover gap-3">
+            <thead>
+                <tr>
+                    <th scope="col"><h5>Property</h5></th>
+
+                    <th scope="col"><h5>Value</h5></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Username</th>
+                    <div class="updateForm d-none"id="updateForm">
+                        <form action="/user/{{user.id}}/settings" method="POST">
+                            <input type="text" class="input-group
+                                form-control-comment
+                                transparent-input w-50" name="updateInput"
+                                value={{user.username}}
+                                placeholder="Type your new username:">
+                            <button type="submit" class="btn
+                                btn-outline-danger ml-1">Accept
+                            </button>
+                            <button type="submit" class="btn
+                                btn-outline-danger btn-outline-danger-x ml-2
+                                btn-sm">X
+                            </button>
+                        </form>
+                    </div>
+                    <td id="nameField" class="nameField"><p
+                            class="usernameField" id="usernameField">{{user.username}}</p></td>
+                    <button id="cancel" class="btn btn-danger d-none">Cancel
+                        X</button>
+                    <td><button id="update" class="btn btn-danger btn-small">Update</button></td>
+                </tr>
+
+                <script>
+                    const usernameField = document.getElementById("usernameField") // Field name
+                    const updateForm = document.getElementById("updateForm") // updateForm
+                    const nameField = document.getElementById("nameField") // Field name
+                    const update = document.getElementById("update") // Update Button
+                    const updateInput = document.getElementById("updateInput") // Update Input (form)
+                    update.addEventListener("click", (event) => {
+                        console.log('Update button clicked!: ', event.target)
+                        update.classList.add("d-none");
+                        usernameField.classList.add("d-none");
+                        updateForm.classList.remove("d-none");
+                        updateForm.classList.add("d-flex")
+                        nameField.appendChild(updateForm);
+                    })
+                </script>
+                <tr>
+                    <th scope="row">E-mail</th>
+                    <td>{{user.email}}</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Phone</th>
+                    <td>5555555555</td> {{!-- NEXT UPDATE *** PHONE --}}
+                </tr>
+                <tr>
+                    <th scope="row">Joined date</th>
+                    <td>{{user.date}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">User pass</th>
+                    <td>{{user.id}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Search</th>
+                    <td>@{{user.username}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

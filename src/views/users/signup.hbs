@@ -1,0 +1,64 @@
+{{!-- View of "/signup" GET --}}
+
+<div class="row mr-3">
+    <div class="d-none d-md-block col-md-5">
+        <img src="/img/umbrella1.png" class="img-fluid img-thumbnail w-100
+            umbrella"
+            alt="mobile">
+    </div>
+    <div class="col-12 col-md-7">
+        {{!-- SIGNUP-Form --}}
+        <div class="jumbotron jumbotron-fluid rounded pt-2 pb-4 formSignUp">
+            <div class="container">
+                <h2 class="display-6 text-center mr-2 align-text-top">Register
+                    your account</h2>
+                <p class="lead pl-4">Join this awesome application.</p>
+                <hr class="w-75">
+
+                <form action="/signup" class="form" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control w-75
+                            transparent-input" name="username"
+                            value="{{currentInputValues.username}}"
+                            placeholder="Username...">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control w-75
+                            transparent-input" name="email"
+                            placeholder="E-mail...">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control w-75
+                            transparent-input"
+                            name="password"
+                            value="{{currentInputValues.password}}"
+                            placeholder="Password...">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control w-75
+                            transparent-input"
+                            name="confirm_Password"
+                            value="{{currentInputValues.confirm_Password}}"
+                            placeholder="Confirm password...">
+                    </div>
+
+                    <hr class="w-75">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-login btn-block
+                            signMeUpButton
+                            w-50 mx-auto">
+                            <span class="sigmeUpIcon">Sign me up!</span> <i
+                                class="fas fa-arrow-circle-right sigmeUpIcon"></i></button>
+                    </div>
+                </form>
+                <hr class="p-3">
+                <div class="container">
+                    <span class="align-bottom align-text-bottom mt-4">Have an
+                        account? <a href="/" class="text-decoration-none
+                            font-weight-bold a-signUp">Log In!</a> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

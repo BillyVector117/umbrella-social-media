@@ -1,0 +1,18 @@
+{{!-- Success alert: --}}
+{{#if success_msg}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ success_msg }} {{!-- Flash message (Customized) --}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/if}}
+{{!-- Failure alert: --}}
+{{#if error_msg}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{ error_msg }} {{!-- Flash message (Customized) --}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/if}}

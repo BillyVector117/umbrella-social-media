@@ -1,0 +1,155 @@
+<h4>Hello, {{ user.username }}!</h4>
+<hr>
+
+<div class="row">
+    <div class="col-12 col-md-6 mx-auto" style="max-width: 24rem;">
+        {{#each posts}}
+        <div class="card mb-3 card homeCard">
+            <div class="card-header">
+                {{!-- URL-testing: https://picsum.photos/40/40 --}}
+                <a class="text-danger text-decoration-none"
+                    href="/user/{{user}}">
+                    {{!-- Testing: src="https://picsum.photos/40/40" --}}
+                    <img src={{avatarCard}} {{!-- From 'user' object --}}
+                        class="rounded-circle avatarCard">
+                    |<strong> {{decodedUser}}</strong>
+                </a>
+            </div>
+            <div class="container containerImage">
+
+                <img class="card-img-top img-fluid imageCard"
+                    src="{{imagePath}}" loading="lazy" alt="{{title}}"
+                    data-bs-toggle="modal" data-bs-target="#modal"
+                    onclick=showImage(this)>
+            </div>
+            <div class="card-body">
+                {{!-- like/dislike functions are in scripts.js static file --}}
+                {{#if liked}}
+                <div id="likes" class="d-flex" data-id={{_id}}>
+                    {{!-- DISLIKE BUTTON/Show--}}
+                    <button data-id={{_id}} class="hearth"
+                        onclick=disLike(this)>
+                        <i id="filled" data-id={{_id}}
+                            class="fas fa-heart">
+                        </i>
+                    </button>
+                    {{!-- like/hidden --}}
+                    <button data-id={{_id}} class="hearth"
+                        onclick=giveLike(this)>
+                        <i id="noFilled" data-id={{_id}}
+                            class="far fa-heart d-none">
+                        </i>
+                    </button>
+                    <span class="counterLikes" id="count">{{likes}}</span>
+                    <p><i
+                            class="fas fa-eye icon-eye"></i>
+                        {{views}}</p>
+                </div>
+                {{else}}
+                <div id="likes" class="d-flex" data-id={{_id}}>
+                    {{!-- LIKE BUTTON/show --}}
+                    <button data-id={{_id}} class="hearth"
+                        onclick=giveLike(this)>
+                        <i id="noFilled" data-id={{_id}}
+                            class="far fa-heart">
+                        </i>
+                    </button>
+                    {{!-- dislike/hidden --}}
+                    <button data-id={{_id}} class="hearth"
+                        onclick=disLike(this)>
+                        <i id="filled" data-id={{_id}}
+                            class="fas fa-heart d-none">
+                        </i>
+                    </button>
+                    <span class="counterLikes" id="count">{{likes}}</span>
+                    <p><i
+                            class="fas fa-eye icon-eye"></i>
+                        {{views}}</p>
+                </div>
+                {{/if}}
+
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-text">{{description}}</p>
+                <span
+                    class="float-left text-muted align-text-bottom"
+                    style="font-weight:
+                    normal;"><small>{{decodedDate}} </small>
+                </span>
+            </div>
+            <script>
+    
+            </script>
+            {{!-- Comments Section --}}
+            <div class="card-footer bg-transparent border-success">
+                <h6 class="text-strong">comments: </h6>
+                {{#each comments}}
+                {{!-- <h6>{{userId</h6> --}}
+                <h6 class="text-strong"> <a href="/user/{{userId}}"
+                        class="titleGallery text-decoration-none">{{username}}</a>:
+                    <span
+                        style="font-weight: normal;" class="text-muted"><small>{{comment}}</small></span></h6>
+                {{/each}}
+                {{!-- 'id' refers to each ID propery in every single card
+                (image)--}}
+                <form action="/images/{{id}}/comment" method="POST">
+                    <div class="form-group form-comment">
+                        <input type="text" class="form-control
+                            form-control-comment
+                            transparent-input" name="comment"
+                            placeholder="Type a comment">
+                        {{!-- Hidden inputs to send Current user credentials
+                        --}}
+                        <input type="text" class="form-control
+                            form-control-comment d-none
+                            transparent-input" name="username"
+                            value={{../user.username}}>
+                        <input type="text" class="form-control
+                            form-control-comment d-none
+                            transparent-input" name="email"
+                            value={{../user.email}}>
+                        <input type="text" class="form-control
+                            form-control-comment d-none
+                            transparent-input" name="id" value={{../user._id}}>
+                        {{!-- End hidden inputs --}}
+                        <button type="submit" class="buttonSubmitIcon"><i
+                                class="far fa-arrow-alt-circle-right
+                                iconComment"></i></button>
+                    </div>
+                </form>
+            </div>
+            {{!-- Comments Section end--}}
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1"
+            aria-labelledby="showImageLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="showImageLabel">Full Image</h5>
+                        <button type="button" class="btn btn-close"
+                            data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="imageTitle">{{imagePath}}</h6>
+                        <img class="img-fluid imageModal" alt="Full-image">
+                    </div>
+                </div>
+            </div>
+        </div>{{!-- End modal --}}
+        {{/each}}
+
+
+    </div>
+</div>
+<script>
+    // Load dynamic data in Bootstrap Modal
+    function showImage(element) {
+        const imageModal = document.querySelector(".imageModal") // img
+        const imageTitle = document.querySelector(".imageTitle") // h6
+    
+        imageModal.setAttribute("src", element.src)
+       imageTitle.innerHTML = element.alt
+        console.log(element)
+    }
+</script>
+{{>uploadBar}}

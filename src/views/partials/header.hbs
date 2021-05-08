@@ -1,0 +1,41 @@
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-light justify-content-start navBar">
+    {{!-- Validate Navbar Links to registered/unregistered users
+    "user" is receive from passport when a routes is render a view, it stores
+    user's Info in req/res middlewares
+    --}}
+    {{!-- <h6>{{user</h6> --}}
+    {{#if user}}
+    <a class="navbar-brand mx-auto p-4 titleNav" href="/home">
+        <h1 class="titleNav">UMBRELLA CORPORATION</h1>
+    </a>
+    <ul class="navbar-nav mr-3">
+        <li class="nav-item active">
+            <a class="text-decoration-none linkNav" href="/user/{{user.id}}">My
+                profile</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav mr-3">
+        <li class="nav-item active">
+            <a class="text-decoration-none linkNav" href="/logout">Log out</a>
+        </li>
+    </ul>
+
+    <li class="nav-item dropdown listStyle mr-3">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item linkNav" href="/user/{{user.id}}/settings">Settings</a>
+        </div>
+    </li>
+    {{else}}
+    <a class="navbar-brand titleNav mx-auto">
+        {{!-- <img src="" width="30"
+            height="30" class="d-inline-block align-top" alt=""> --}}
+        <h1 class="titleNoUser">UMBRELLA CORPORATION</h1>
+    </a>
+    {{/if}}
+
+</nav>

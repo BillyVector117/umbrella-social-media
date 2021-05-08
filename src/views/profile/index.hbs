@@ -1,0 +1,160 @@
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-md-12 profileColumn">
+            <nav class="navbar navProfile">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{#if realUser}}
+                        <div class="firstColProfile float-left avatarImage"
+                            disabled="disabled" data-bs-toggle="modal"
+                            data-bs-target="#uploadModal">
+                            <img src="{{visitedUser.imagePath}}" class="border
+                                border-success imageProfile img-fluid"
+                                alt="Profile pic">
+                        </div>
+                        {{else}}
+                        <div class="firstColProfile disabled float-left">
+                            <img src="{{visitedUser.imagePath}}" class="border
+                                border-info
+                                imageProfile"
+                                alt="Profile pic">
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="col-md-6 colProfile"><h2><strong>{{visitedUser.username}}</strong></h2></div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Modal update picture -->
+    <div class="modal fade" id="uploadModal" tabindex="-1"
+        aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Update profile
+                        picture</h5>
+                    <button type="button" class="btn btn-close"
+                        data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    {{!-- CONTENT MODAL --}}
+                    <form action="/user/updatePicture"
+                        enctype="multipart/form-data" method="POST"
+                        onchange="">
+                        <label for="image">Select your new profile picture:
+                        </label>
+                        <div class="form-group">
+                            <input type="file" class="form-control necesary
+                                w-75
+                                transparent-input"
+                                id="necesary"
+                                onchange=""
+                                name="image">
+                        </div>
+
+                        <button id="btn-success" type="submit" class="btn
+                            btn-success">Accept</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button style="margin-top: 10px;" type="button" class="btn
+                        btn-secondary"
+                        data-bs-dismiss="modal" onclick="">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>{{!-- End Modal --}}
+    <hr>
+    <h3 class="text-center titleGallery"><strong>Gallery</strong></h3>
+    {{!-- Content 'posts' is received from '/:id' route--}}
+    <div class="row text-center">
+        {{#each posts}}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2 galleryImages">
+            {{#if ../realUser}}
+            <div class="container border border-success gallery">
+                <img src={{imagePath}} class="img-fluid galleryImage"
+                    loading="lazy"
+                    alt={{title}} data-bs-toggle="modal"
+                    data-bs-target="#modal"
+                    onclick=showImage(this)>
+                <h5><i onclick=deleteEvent(this) data-id={{_id}} id="iconTrash"
+                        class="fas fa-trash
+                        iconTrash"></i></h5>
+            </div>
+            {{else}}
+            <div class="container border border-danger gallery">
+                <img src={{imagePath}} class="img-fluid galleryImage"
+                    loading="lazy"
+                    alt={{title}} data-bs-toggle="modal"
+                    data-bs-target="#modal"
+                    onclick=showImage(this)>
+            </div>
+            {{/if}}
+        </div>
+        <script>
+      function deleteEvent (event) {
+        const response = confirm("Do you really want to delete this picture?")
+        if (response) {
+
+        let image_id = event.getAttribute("data-id"); // Capture image-id (click reference)
+        console.log("trash");
+        fetch(`/images/${image_id}/delete`, {
+            method: "POST",
+        })
+        .then((res) => res)
+        .catch((error) => console.error("Error:", error))
+        .then((response) => {
+        console.log("success deleted: ", response);
+        location.reload();
+        });
+        }
+    };
+  </script>
+        <!-- Modal Show full image-->
+        <div class="modal fade" id="modal" tabindex="-1"
+            aria-labelledby="showImageLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="showImageLabel">Full Image</h5>
+                        <button type="button" class="btn btn-close"
+                            data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body">
+                        {{!-- MODAL BODY --}}
+                        <h6 class="imageTitle">{{imagePath}}</h6>
+                        <img class="img-fluid imageModal" alt="Full-image">
+                        <div id="likes" class="d-flex mt-2" data-id={{_id}}>
+                            {{!-- DISLIKE BUTTON/Show--}}
+                            <button data-id={{_id}} class="hearth">
+                                <i id="filled" data-id={{_id}}
+                                    class="fas fa-heart">
+                                </i>
+                            </button>
+                            <span class="counterLikes" id="count">{{likes}}</span>
+                            <p><i
+                                    class="fas fa-eye icon-eye"></i>
+                                {{views}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- End modal --}}
+        {{/each}}
+
+    </div>
+</div>
+<script>
+    // Load dynamic data in Bootstrap Modal
+    function showImage(element) {
+        const imageModal = document.querySelector(".imageModal") // img
+        const imageTitle = document.querySelector(".imageTitle") // h6
+    
+        imageModal.setAttribute("src", element.src)
+       imageTitle.innerHTML = element.alt
+        console.log(element)
+    }
+</script>

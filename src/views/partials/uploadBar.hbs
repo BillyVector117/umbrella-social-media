@@ -1,0 +1,137 @@
+
+<section class="mx-auto text-center pb-5 uploadBar w-50 border border-danger"
+    id="uploadBar"
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn" data-bs-toggle="modal"
+        onclick=changePosition()
+        data-bs-target="#uploadModal">
+        <a class="btn btn-link btn-floating btn-lg text-dark
+            m-1"
+            role="button"
+            data-mdb-ripple-color="dark">
+
+            <h2><i class="fas fa-camera camera"></i></h2>
+            Upload
+        </a>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1"
+        aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">New Post</h5>
+                    <button type="button" class="btn btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"
+                        onclick=closeModal()>X</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/home/newPost/{{user.id}}"
+                        enctype="multipart/form-data" method="POST"
+                        onchange=blockButton()>
+                        <label for="title"></label>
+                        <div class="form-group">
+                            <input type="text" class="form-control necesary
+                                w-75
+                                transparent-input"
+                                id="necesary"
+                                onchange=blockButton()
+                                name="title"
+                                placeholder="Picture name...">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control necesary
+                                w-75 
+                                transparent-input"
+                                id="necesary"
+                                onchange=blockButton()
+                                name="description"
+                                placeholder="Picture description...">
+                        </div>
+                        <div class="form-group file-input">
+                            <input type="file" class="form-control necesary
+                                w-75" id="image" name="image"
+                                placeholder="Upload your picture...">
+                        </div>
+                        <div class="form-group d-none">
+                            <input type="text" class="form-control
+
+                                w-75" name="username"
+                                value="{{user.username}}"
+                                {{!-- user contains all user Object properties /
+                                credentials --}}
+                                data-id="{{user.username}}">
+                        </div>
+                        <div class="form-group d-none">
+                            <input type="text" class="form-control
+
+                                w-75" name="userId"
+                                value="{{user.id}}"
+                                {{!-- user contains all user Object properties /
+                                credentials --}}
+                                data-id="{{user.id}}">
+                        </div>
+                        <button id="btn-success" type="submit" class="btn
+                            btn-success">Upload</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button style="margin-top: 10px;" type="button" class="btn
+                        btn-secondary"
+                        data-bs-dismiss="modal" onclick=closeModal()>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>{{!-- End Modal --}}
+
+    <script>
+// Prevent Upload button dissapear after Modal
+//*** Note: NEXT UPDATE: AVOID UPLOAD BUTTON CHANGE TO POSITION STICKY WHEN CLICKED / FIX BLOCK BUTTON FUNCTION
+function blockButton() {
+    const name = document.querySelectorAll("#necesary")
+    const button = document.getElementById('btn-success')
+    const image = document.querySelector('.necesary')
+
+    if (name.values != null && image.value != null) {
+        button.removeAttribute("disabled")
+    }
+   
+}
+function changePosition() {
+    const el = document.getElementById("uploadBar")
+el.classList.remove("uploadBar")
+// const backg = document.getElementById("uploadModal")
+document.addEventListener("click", function(event){
+    if(event.target.tagName.toLowerCase() === "div"){
+
+    console.log("this is the modal")
+    }
+})
+const button = document.getElementById('btn-success')
+button.setAttribute("disabled", "disabled")
+
+ console.log(element) // Name, description, file fields
+}
+function closeModal() {
+    const el = document.getElementById("uploadBar")
+el.classList.add("uploadBar")
+}
+
+
+</script>
+</section>
+
+
+{{!-- <form action="/home/newPost/{{user.id" enctype="multipart/form-data"
+    class="formPicture" method="POST">
+    <div class="input-group mb-3 w-50 mx-auto">
+        <label class="form-label text-dark" for="customFile">Upload your pic</label>
+        <input type="file" class="" id="customFile" />
+        <input type="text">
+    </div>
+    <button type="submit" class="btn btn-info">Upload</button>
+
+</form> --}}

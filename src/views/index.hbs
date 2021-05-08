@@ -1,0 +1,47 @@
+<div class="row mr-3">
+    <div class="d-none d-md-block col-md-5">
+        <img src="/img/umbrella1.png" class="img-fluid img-thumbnail w-100
+            umbrella"
+            alt="mobile">
+    </div>
+    <div class="col-12 col-md-7">
+        {{!-- Login-Form --}}
+        <div class="jumbotron jumbotron-fluid rounded pt-2 pb-4 formSignUp">
+            <div class="container">
+                <h2 class="display-6 text-center mr-2 align-text-top
+                    textBackground">Sign in</h2>
+                <p class="lead pl-4 textBackground">Welcome back to our
+                    application.</p>
+                <hr class="w-75">
+                <form action="/login" class="form" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control w-75
+                            transparent-input" name="email" value="{{email}}"
+                            placeholder="E-mail...">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control w-75
+                            transparent-input"
+                            name="password" placeholder="Password...">
+                    </div>
+                    <hr class="w-75">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-login btn-block
+                            signMeUpButton
+                            w-50 mx-auto"><span class="sigmeUpIcon">Log me In
+                            </span><i class="fas fa-sign-in-alt sigmeUpIcon"></i></button>
+                    </div>
+                </form>
+                <hr class="p-3">
+                <div class="container">
+                    <span class="align-bottom align-text-bottom textBackground
+                        mt-4">Don't have
+                        an account yet? <a href="/signup"
+                            class="text-decoration-none
+                            font-weight-bold a-signUp">Sign Up!</a> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
