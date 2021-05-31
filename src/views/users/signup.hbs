@@ -1,7 +1,7 @@
 {{!-- View of "/signup" GET --}}
 
-<div class="row mr-3">
-    <div class="d-none d-md-block col-md-5">
+<div class="row containerMain">
+    <div class="umbrellaContainer d-md-block col-md-5">
         <img src="/img/umbrella1.png" class="img-fluid img-thumbnail w-100
             umbrella"
             alt="mobile">
@@ -9,10 +9,10 @@
     <div class="col-12 col-md-7">
         {{!-- SIGNUP-Form --}}
         <div class="jumbotron jumbotron-fluid rounded pt-2 pb-4 formSignUp">
-            <div class="container">
-                <h2 class="display-6 text-center mr-2 align-text-top">Register
-                    your account</h2>
-                <p class="lead pl-4">Join this awesome application.</p>
+            <div class="container text-center">{{!-- container --}}
+                <h2 class="display-6 text-center mr-2 align-text-top
+                    textBackground">Register your account</h2>
+                <p class="lead pl-4 textBackground">Join this awesome application.</p>
                 <hr class="w-75">
 
                 <form action="/signup" class="form" method="POST">
