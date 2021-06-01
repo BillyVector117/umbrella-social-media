@@ -1,6 +1,9 @@
+const dotenv = require('dotenv');
 const mongoose = require("mongoose");
-const URI = `mongodb+srv://billy:rN31ulvuJ9Hx9EGF@cluster0.0nfke.mongodb.net/Umbrella?retryWrites=true&w=majority`;
+dotenv.config();
+const URI = `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.0nfke.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
 
+// mongodb+srv://XXXXXXXXX:rXXXXXXXXX@cluster0.0nfke.mongodb.net/XXXXXXXXX?retryWrites=true&w=majority
 mongoose
   .connect(URI, {
     useCreateIndex: true,

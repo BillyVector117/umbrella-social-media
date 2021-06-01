@@ -353,16 +353,44 @@ button:disabled, button[disabled] {
 
 /* Username update buttons */
 
+.btn-update-username {
+    color: #fff;
+    background-color: #736163;
+    border-color: #dc3545;
+}
+
+.btn-outline-accept {
+    border-color: #dc3545;
+    background: #d5cbcb;
+}
+
+.btn-outline-accept:hover {
+    background: #cc4141;
+    color: #f1f0ed;
+}
+
+.btn-danger-cancel:hover {
+    background: #e8c7c7;
+}
+
+.btn-outline-danger-x {
+    background: #fb8686;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger-x:hover {
+    background: #e8c7c7;
+}
+
+.btn-danger-cancel {
+    background: #fb8686;
+    border-color: #dc3545;
+}
+
 .btn-outline-danger:hover {
     color: #0e0303;
     background-color: #dad1d1;
     border-color: #050505;
-}
-
-.btn-outline-danger-x:hover {
-    color: #0e0303;
-    background-color: #d60e0e;
-    border-color: #dc3545;
 }
 
 .form-comment {
@@ -411,7 +439,9 @@ button:disabled, button[disabled] {
 .galleryImage {
     min-width: 15rem;
 }
+
 /* Modal */
+
 .modal-backdrop.show {
     opacity: .5;
     width: 100%;
@@ -429,7 +459,6 @@ button:disabled, button[disabled] {
     .modal-content {
         padding: 2rem;
         margin-top: 50%;
-    
     }
 }
 
